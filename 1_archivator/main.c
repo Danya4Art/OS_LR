@@ -10,14 +10,11 @@ int main(int argc, char *argv[]) {
     return 1;
   }
   if (strcmp(argv[1], "-a") == 0) {
-    arc(argv[2], argv[3], 0);
+    return arc(argv[2], argv[3], 0);
   }
   if (strcmp(argv[1], "-u") == 0) {
-    unarc(argv[2], argv[3], 0);
+    return unarc(argv[2], argv[3], 0);
   }
-  if (strcmp(argv[1], "-u") != 0 && (strcmp(argv[1], "-a") != 0)) {
-    printf("Wrong argument! Need -a or -u.\n");
-    return 2;
-  }
+  printf("Wrong argument! Need -a or -u.\n");
   return 0;
 }
