@@ -1,8 +1,9 @@
+#ifndef STACK_H
+#define STACK_H
+
 #include "stack.h"
 
-
-int 
-final_stack (Stack **stack) {
+int final_stack (Stack **stack) {
     while (*stack != NULL) {
         Stack *old_node = *stack;
         *stack = (*stack)->next;
@@ -12,8 +13,7 @@ final_stack (Stack **stack) {
     return 0;
 }
 
-int 
-stack_pop(Stack **stack, void *res, size_t size_rez)
+int stack_pop(Stack **stack, void *res, size_t size_rez)
 {
     Stack *node;
     node = *stack;
@@ -26,8 +26,7 @@ stack_pop(Stack **stack, void *res, size_t size_rez)
     return 0;
 }
 
-int 
-stack_pop_start(Stack **stack, void *res, size_t size_rez)
+int stack_pop_start(Stack **stack, void *res, size_t size_rez)
 {
     Stack *node;
     Stack *node2;
@@ -54,8 +53,7 @@ stack_pop_start(Stack **stack, void *res, size_t size_rez)
     return 0;
 }
 
-int
-stack_push(Stack **stack, const void *data, size_t size) 
+int stack_push(Stack **stack, const void *data, size_t size) 
 {
     
     Stack *new_node;
@@ -77,8 +75,7 @@ stack_push(Stack **stack, const void *data, size_t size)
     
 }
 
-int
-stack_push_start(Stack **stack, const void *data, size_t size) 
+int stack_push_start(Stack **stack, const void *data, size_t size) 
 {
     
     Stack *new_node;
@@ -119,3 +116,5 @@ stack_push_start(Stack **stack, const void *data, size_t size)
     }
     return 0;
 }
+
+#endif /* STACK_H */

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <wait.h>
+
 typedef struct Stack{
     void *data;
     struct Stack *next;

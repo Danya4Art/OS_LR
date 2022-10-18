@@ -1,3 +1,6 @@
+#ifndef PARSER_H
+#define PARSER_H
+
 #include "parser.h"
 #define ALLOC_STEP 100
 #define MAX_STR_LEN 1024
@@ -46,8 +49,7 @@ enum {ELEM_SIZE  =  sizeof(Elem_size),  CHAR_SIZE = sizeof(char),   FUNC_SIZE = 
 
 jmp_buf ebuf;
 
-int 
-analyze(const void *data, const size_t size, Token *tokens, int *bg_flag)
+int analyze(const void *data, const size_t size, Token *tokens, int *bg_flag)
 {
     int curr_size = 0, curr_elem_size = 0, curr_external_offset = 0, curr_element_offset = 0;
     Calculate_elem func;
@@ -304,8 +306,7 @@ analyze(const void *data, const size_t size, Token *tokens, int *bg_flag)
     return 0;
 }
 
-int 
-parce_start(Polis *polis, const Token *tokens)
+int parce_start(Polis *polis, const Token *tokens)
 {
     void *elem;
     size_t curr_polis_size = 0, curr_token_size = 0; 
@@ -322,8 +323,7 @@ parce_start(Polis *polis, const Token *tokens)
 }
 
 
-int 
-parce_binary(Polis *polis, const Token *tokens, void **elem, size_t *curr_polis_size, size_t *curr_token_size)
+int parce_binary(Polis *polis, const Token *tokens, void **elem, size_t *curr_polis_size, size_t *curr_token_size)
 {
     parce_symbol(polis, tokens, elem, curr_polis_size, curr_token_size);
     while((FUNC_POINTER(*elem, ELEM_SIZE) == count_and_or) ||
@@ -337,8 +337,7 @@ parce_binary(Polis *polis, const Token *tokens, void **elem, size_t *curr_polis_
     return 0;
 }
 
-int 
-parce_symbol(Polis *polis, const Token *tokens, void **elem, 
+int parce_symbol(Polis *polis, const Token *tokens, void **elem, 
              size_t *curr_polis_size, size_t *curr_token_size)
 {
     char c = ((char *)*elem)[ELEM_SIZE+FUNC_SIZE];
@@ -375,8 +374,7 @@ parce_symbol(Polis *polis, const Token *tokens, void **elem,
     return 0;
 }
 
-int
-take_next_elem(const Token *tokens, void **elem, size_t *curr_token_size)
+int take_next_elem(const Token *tokens, void **elem, size_t *curr_token_size)
 {
     if (*curr_token_size > tokens->size - 1) {
         return 1;
@@ -388,8 +386,7 @@ take_next_elem(const Token *tokens, void **elem, size_t *curr_token_size)
     return 0;
 }
 
-int
-put_elem_to_polis (Polis *polis, const void *elem, size_t *curr_polis_size) {
+int put_elem_to_polis (Polis *polis, const void *elem, size_t *curr_polis_size) {
 
     if ((*curr_polis_size + SIZE_POINTER(elem, 0) + FUNC_SIZE + ELEM_SIZE) 
         >= polis->size) {
@@ -405,8 +402,7 @@ put_elem_to_polis (Polis *polis, const void *elem, size_t *curr_polis_size) {
     return 0;
 }
 
-int 
-count_pipeline(const void *elem, Elem_size size, Stack **stack, Polis *pol)
+int count_pipeline(const void *elem, Elem_size size, Stack **stack, Polis *pol)
 {
     PROLOG;
     int fd_for_pipeline[2], fd_for_result[2];
@@ -510,8 +506,7 @@ count_pipeline(const void *elem, Elem_size size, Stack **stack, Polis *pol)
     return 0;
 }
 
-int 
-count_and_or(const void *elem, Elem_size size, Stack **stack, Polis *pol) 
+int count_and_or(const void *elem, Elem_size size, Stack **stack, Polis *pol) 
 {
     PROLOG;
     int pid1, pid2;
@@ -738,8 +733,7 @@ int write_to_ch(int fd, void *buf, size_t size)
     } while(curr_size > 0);
     return 0;
 }
-int
-make_arg_array(Polis polis, char *arg[], int *curr_element, char str[])
+int make_arg_array(Polis polis, char *arg[], int *curr_element, char str[])
 {
     int i = 0;
     size_t curr_size = ELEM_SIZE + FUNC_SIZE, prev_size = 0;
@@ -764,8 +758,7 @@ make_arg_array(Polis polis, char *arg[], int *curr_element, char str[])
     return 0;
 }
 
-int 
-take_polis_from_stack(Stack **stack, Polis *first_arg)
+int take_polis_from_stack(Stack **stack, Polis *first_arg)
 {
     size_t curr_polis_size = 0, curr_element = 1;
     int flag = 0;
@@ -822,22 +815,19 @@ take_polis_from_stack(Stack **stack, Polis *first_arg)
     return 0;
 }
 
-int 
-count_subshell(const void *elem, Elem_size size, Stack **stack, Polis *pol) 
+int count_subshell(const void *elem, Elem_size size, Stack **stack, Polis *pol) 
 {
     stack_push_start(stack, elem, size + ELEM_SIZE + FUNC_SIZE);
     return 0;
 }
 
-int 
-end_subshell(const void *elem, Elem_size size, Stack **stack, Polis *pol)
+int end_subshell(const void *elem, Elem_size size, Stack **stack, Polis *pol)
 {
     stack_push_start(stack, elem, size + ELEM_SIZE + FUNC_SIZE);
     return 0;
 }
 
-int 
-count_argument(const void *elem, Elem_size size, Stack **stack, Polis *pol)
+int count_argument(const void *elem, Elem_size size, Stack **stack, Polis *pol)
 {
     stack_push_start(stack, elem, size + ELEM_SIZE + FUNC_SIZE);
     return 0;
@@ -853,3 +843,5 @@ int count_output_data(const void *elem, Elem_size size, Stack **stack, Polis *po
 {
     return 0;
 }
+
+#endif /* PARSER_H */

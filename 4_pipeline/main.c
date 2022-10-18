@@ -1,3 +1,4 @@
+#include "parser.h"
 
 #include<stdio.h> 
 #include<stdlib.h> 
@@ -8,7 +9,7 @@ void XOR_Crypt(char* Mes, char*Key,char* crypt);
 void ParsingString(char* Name,char** Arg,char*InputString); 
 void StringCheck(char*InputString,int* NameLength,int* CountArg); 
 void ArgsLength (int* LengthArgs,char*InputString); 
-int sympos(char*Mes); 
+int sympos(char* Mes); 
  
 int main(int argc,char**argv){ 
     if(argc!=3){ 
@@ -20,7 +21,6 @@ int main(int argc,char**argv){
     char key[255]; 
     char crypt[255]; 
     memset(Mes, '\0', 255); 
-    memset(key, '\0', 255); 
     memset(crypt, '\0', 255); 
     
     int NameLengthFst=0; 

@@ -1,3 +1,6 @@
+#ifndef POLIS_H
+#define POLIS_H
+
 #include "polis.h"
 
 #define SAFE(call) do { \
@@ -63,3 +66,5 @@ FINALLY:
     final_stack(&stack);
     return flag;
 }
+
+#endif /* POLIS_H */
