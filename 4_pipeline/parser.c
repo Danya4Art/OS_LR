@@ -1,8 +1,6 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#include "files.h"
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<unistd.h>
@@ -99,6 +97,14 @@ int sympos(char*Mes)
 	}
 	return c;
 }
+
+// void StringCheck(char*InputString,int* NameLength,int* CountArg){ 
+//       int i=0; 
+//       while(InputString[i]!=' '&&InputString[i]!='\0'){ 
+//             *NameLength+=1; 
+//             i++; 
+//       }
+// }
 
 
 #endif /* FILES_H */

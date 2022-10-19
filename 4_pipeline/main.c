@@ -5,12 +5,6 @@
 #include<unistd.h> 
 #include<string.h> 
  
-void XOR_Crypt(char* Mes, char*Key,char* crypt); 
-void ParsingString(char* Name,char** Arg,char*InputString); 
-void StringCheck(char*InputString,int* NameLength,int* CountArg); 
-void ArgsLength (int* LengthArgs,char*InputString); 
-int sympos(char* Mes); 
- 
 int main(int argc,char**argv){ 
     if(argc!=3){ 
           printf("Wrong number of parameters"); 
@@ -156,11 +150,3 @@ int main(int argc,char**argv){
     free(LengthArgsSec); 
     return 0; 
 } 
-
-void StringCheck(char*InputString,int* NameLength,int* CountArg){ 
-      int i=0; 
-      while(InputString[i]!=' '&&InputString[i]!='\0'){ 
-            *NameLength+=1; 
-            i++; 
-      }
-}

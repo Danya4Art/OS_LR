@@ -1,12 +1,23 @@
-hello: main.c
-	gcc -o hello -fsanitize=address -g -lm -ldl -Wall -Wpointer-arith -finline-functions -ffast-math main.c
-#	./hello
+program_name = filter
+main_obj = main.o
 
-#First_prog.o: First_prog.c
-#	gcc -c -o First_prog.o First_prog.c
+files_obj = files.o
+main_c = main.c
+
+files_c = files.c
+CFLAGS = -O2 -ftrapv  -fsanitize=address,undefined -Wall -Werror -Wformat-security -Wignored-qualifiers -Winit-self -Wswitch-default -Wfloat-equal -Wshadow -Wpointer-arith -Wtype-limits -Wempty-body -Wlogical-op -Wstrict-prototypes -Wold-style-declaration -Wold-style-definition -Wmissing-parameter-type -Wmissing-field-initializers -Wnested-externs -Wno-pointer-sign -Wcast-qual -Wwrite-strings -std=gnu11
+COMPILER = gcc
+
+all: $(program_name)
+
+$(program_name): $(main_obj) $(files_obj) 
+	$(COMPILER) $(CFLAGS) $(main_obj) $(files_obj) -o $(program_name) -lm
+
+$(files_obj): $(files_c)
+	$(COMPILER) -g -c $(files_c) -o $(files_obj)
+
+$(main_obj): $(main_c)
+	$(COMPILER) -g -c $(main_c) -o $(main_obj)
 
 clean:
-	rm hello *.o
-# "workingdir":"${folder:${file}}",
-# "commandline":"gcc -g  ${file} -o ${file_base_name} && gdb --interpreter=mi --args ./${file_base_name}",
-# "sublimegdb_exec_cmd": "-exec-run",
+	rm *.o $(program)

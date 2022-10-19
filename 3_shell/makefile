@@ -30,4 +30,4 @@ $(main_obj): $(main_c)
 	$(COMPILER) -g -c $(main_c) -o $(main_obj)
 
 clean:
-	rm -rf *.o $(program)
+	rm *.o $(program)
